@@ -1,29 +1,11 @@
-# Homework 3 
+# Tehnozavr Online Shop
 
-## Project setup
+## Changelog
 
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
 
-```
-npm run serve
-```
+### Release alpha 0.01
 
-### Compiles and minifies for production
-
-```
-npm run build
-```
-
-### Lints and fixes files
-
-```
-npm run lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Инициализация каталога
+- Каталог товаров
+- Пагинация товаров по цифрам
