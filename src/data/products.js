@@ -1,48 +1,75 @@
 export default [
     {
-        title: 'GeForce GTX 1050Ti',
-        price: 5000,
-        image: '/img/1050ti.jpg'
-    },
-    {
-        title: 'GTX 1650',
-        price: 12000,
-        image: '/img/1650.jpg'
-    },
-    {
-        title: 'RTX 3060',
-        price: 16000,
-        image: '/img/3060.jpg'
-    },
-    {
-        title: 'RX 6500 XT',
+        id: 1,
+        categoryId: 2,
+        colorId: [1, 6],
+        title: 'Xioami A3',
         price: 13000,
-        image: '/img/6500.jpg'
+        image: '/img/phone.webp',
     },
     {
-        title: 'RX 6600 XT',
-        price: 18000,
-        image: '/img/6600.jpg'
+        id: 2,
+        categoryId: 5,
+        colorId: [2, 6],
+        title: 'Apple AirPods',
+        price: 8000,
+        image: '/img/airpods.webp',
     },
     {
-        title: 'RX 570 8GB (БУ)',
-        price: 4000,
-        image: '/img/570.jpg'
+        id: 3,
+        categoryId: 3,
+        colorId: [3, 4, 6],
+        title: 'Велосипед',
+        price: 12000,
+        image: '/img/bicycle.webp',
     },
     {
-        title: 'RTX 4090',
-        price: 32000,
-        image: '/img/4090.jpg'
-    },
-    {
-        title: 'RTX 3080',
-        price: 25000,
-        image: '/img/3080.jpg'
-    },
-    {
-        title: 'GTX 1060 6GB (БУ)',
+        id: 4,
+        categoryId: 3,
+        colorId: [5],
+        title: 'Лонгборд',
         price: 5000,
-        image: '/img/1060.jpg'
+        image: '/img/board.jpg',
+    },
+    {
+        id: 5,
+        categoryId: 5,
+        colorId: [1],
+        title: 'Наушники Sony',
+        price: 28000,
+        image: '/img/headphones.webp',
+    },
+    {
+        id: 6,
+        categoryId: 2,
+        colorId: [1],
+        title: 'Google Pixel 4',
+        price: 16000,
+        image: '/img/phone-2.webp',
+    },
+    {
+        id: 7,
+        categoryId: 4,
+        colorId: [3],
+        title: 'Радионяня',
+        price: 3000,
+        image: '/img/radio.webp',
+    },
+    {
+        id: 8,
+        categoryId: 3,
+        colorId: [4, 6],
+        title: 'Самокат',
+        price: 10000,
+        image: '/img/scooter.webp',
+    },
+    {
+        id: 9,
+        categoryId: 1,
+        colorId: [1, 2],
+        title: 'Зубная щетка',
+        price: 4000,
+        image: '/img/toothbrush.webp',
     },
 
 ]
