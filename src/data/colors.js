@@ -28,6 +28,6 @@ export default [
         id: 6,
         title: 'Золотой',
         color: 'gold'
-    },
+    }
 
 ]

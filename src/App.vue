@@ -11,11 +11,11 @@
 
     <div class="content__catalog">
       <ProductFilter :price-from.sync="filterPriceFrom" :price-to.sync="filterPriceTo"
-        :category-id.sync="filterCategoryId" />
+        :category-id.sync="filterCategoryId" :color-id.sync="filterColorId" />
 
       <section class="catalog">
 
-        <ProductList :products="products" />
+        <ProductList :products="products" :colors="colors" />
 
         <BasePagination v-model="page" :count="countProducts" :per-page="productsPerPage" />
       </section>
@@ -25,7 +25,8 @@
 </template>
 
 <script>
-import products from './data/products'
+import products from './data/products';
+import colors from './data/colors';
 import ProductList from './components/ProductList.vue';
 import BasePagination from './components/BasePagination.vue';
 import ProductFilter from './components/ProductFilter.vue';
@@ -39,7 +40,7 @@ export default {
       filterPriceFrom: 0,
       filterPriceTo: 0,
       filterCategoryId: 0,
-
+      filterColorId: 0,
 
       page: 1,
       productsPerPage: 6,
@@ -62,6 +63,10 @@ export default {
         filteredProducts = filteredProducts.filter(product => product.categoryId === this.filterCategoryId);
       }
 
+
+      if (this.filterColorId) {
+        filteredProducts = filteredProducts.filter(product => product.colors.includes(this.filterColorId));
+      }
 
 
       return filteredProducts;

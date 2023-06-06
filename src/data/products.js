@@ -2,7 +2,7 @@ export default [
     {
         id: 1,
         categoryId: 2,
-        colorId: [1, 6],
+        colors: [1, 4, 6],
         title: 'Xioami A3',
         price: 13000,
         image: '/img/phone.webp',
@@ -10,7 +10,7 @@ export default [
     {
         id: 2,
         categoryId: 5,
-        colorId: [2, 6],
+        colors: [2],
         title: 'Apple AirPods',
         price: 8000,
         image: '/img/airpods.webp',
@@ -18,7 +18,7 @@ export default [
     {
         id: 3,
         categoryId: 3,
-        colorId: [3, 4, 6],
+        colors: [3, 5],
         title: 'Велосипед',
         price: 12000,
         image: '/img/bicycle.webp',
@@ -26,7 +26,7 @@ export default [
     {
         id: 4,
         categoryId: 3,
-        colorId: [5],
+        colors: [1, 5],
         title: 'Лонгборд',
         price: 5000,
         image: '/img/board.jpg',
@@ -34,7 +34,7 @@ export default [
     {
         id: 5,
         categoryId: 5,
-        colorId: [1],
+        colors: [1],
         title: 'Наушники Sony',
         price: 28000,
         image: '/img/headphones.webp',
@@ -42,7 +42,7 @@ export default [
     {
         id: 6,
         categoryId: 2,
-        colorId: [1],
+        colors: [1],
         title: 'Google Pixel 4',
         price: 16000,
         image: '/img/phone-2.webp',
@@ -50,7 +50,7 @@ export default [
     {
         id: 7,
         categoryId: 4,
-        colorId: [3],
+        colors: [3, 4, 5],
         title: 'Радионяня',
         price: 3000,
         image: '/img/radio.webp',
@@ -58,7 +58,7 @@ export default [
     {
         id: 8,
         categoryId: 3,
-        colorId: [4, 6],
+        colors: [6],
         title: 'Самокат',
         price: 10000,
         image: '/img/scooter.webp',
@@ -66,7 +66,7 @@ export default [
     {
         id: 9,
         categoryId: 1,
-        colorId: [1, 2],
+        colors: [1, 2, 3, 4, 5, 6],
         title: 'Зубная щетка',
         price: 4000,
         image: '/img/toothbrush.webp',
