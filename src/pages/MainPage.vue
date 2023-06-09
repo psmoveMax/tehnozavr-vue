@@ -1,27 +1,27 @@
 <template>
-    <main class="content container">
-        <div class="content__top content__top--catalog">
-            <h1 class="content__title">
-                Каталог
-            </h1>
-            <span class="content__info">
-                152 товара
-            </span>
-        </div>
+  <main class="content container">
+    <div class="content__top content__top--catalog">
+      <h1 class="content__title">
+        Каталог
+      </h1>
+      <span class="content__info">
+        152 товара
+      </span>
+    </div>
 
-        <div class="content__catalog">
-            <ProductFilter :price-from.sync="filterPriceFrom" :price-to.sync="filterPriceTo"
-                :category-id.sync="filterCategoryId" :color-id.sync="filterColorId" />
+    <div class="content__catalog">
+      <ProductFilter :price-from.sync="filterPriceFrom" :price-to.sync="filterPriceTo"
+        :category-id.sync="filterCategoryId" :color-id.sync="filterColorId" />
 
-            <section class="catalog">
+      <section class="catalog">
 
-                <ProductList :products="products"  />
+        <ProductList :products="products" />
 
-                <BasePagination v-model="page" :count="countProducts" :per-page="productsPerPage" />
-            </section>
+        <BasePagination v-model="page" :count="countProducts" :per-page="productsPerPage" />
+      </section>
 
-        </div>
-    </main>
+    </div>
+  </main>
 </template>
 
 <script>
