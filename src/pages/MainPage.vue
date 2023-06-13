@@ -14,7 +14,9 @@
         :category-id.sync="filterCategoryId" :color-id.sync="filterColorId" />
 
       <section class="catalog">
-
+        <div v-if="productsLoading">Загрузка товаров...</div>
+        <div v-if="productsLoadingFailed">Произошла ошибка при загрузке товаров! <button
+            @click.prevent='loadProducts'>Попробовать еще раз</button></div>
         <ProductList :products="products" />
 
         <BasePagination v-model="page" :count="countProducts" :per-page="productsPerPage" />
@@ -30,6 +32,7 @@ import ProductList from '@/components/ProductList.vue';
 import BasePagination from '@/components/BasePagination.vue';
 import ProductFilter from '@/components/ProductFilter.vue';
 import axios from 'axios';
+import { API_BASE_URL } from '@/config';
 
 export default {
   components: { ProductList, BasePagination, ProductFilter },
@@ -45,6 +48,9 @@ export default {
       productsPerPage: 6,
 
       productsData: null,
+
+      productsLoading: false,
+      productsLoadingFailed: false,
 
     };
   },
@@ -81,10 +87,12 @@ export default {
   },
   methods: {
     loadProducts() {
+      this.productsLoading = true;
+      this.productsLoadingFailed = false;
       clearTimeout(this.loadProductsTimer);
       this.loadProductsTimer = setTimeout(() => {
         axios
-          .get('https://vue-study.skillbox.cc/api/products', {
+          .get(`${API_BASE_URL}/api/products`, {
             params: {
               page: this.page,
               limit: this.productsPerPage,
@@ -95,7 +103,8 @@ export default {
             },
           })
           .then((response) => { this.productsData = response.data; })
-          .catch(console.log('failed'));
+          .catch(() => { this.productsLoadingFailed = true; })
+          .then(() => { this.productsLoading = false; });
       }, 0);
     },
   },
