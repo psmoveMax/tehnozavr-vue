@@ -1,6 +1,6 @@
 <template>
   <li class="catalog__item">
-    <router-link class="catalog__pic" :to="{name: 'product', params: {id: product.id}}" >
+    <router-link class="catalog__pic" :to="{ name: 'product', params: { id: product.id } }">
       <img :src="product.image" :alt="product.title">
     </router-link>
 
@@ -15,10 +15,10 @@
     </span>
 
     <ul class="colors colors--black">
-      <li class="colors__item" v-for="color in product.colors" :key="color">
+      <li class="colors__item" v-for="color in product.colors" :key="color.id">
         <label class="colors__label">
-          <input class="colors__radio sr-only" type="radio" :value="{ color }">
-          <span class="colors__value" :style="{ backgroundColor: colors[color - 1].color }">
+          <input class="colors__radio sr-only" type="radio" :value="color.code">
+          <span class="colors__value" :style="{ backgroundColor: color.code }">
           </span>
         </label>
       </li>
@@ -29,24 +29,18 @@
 
 <script>
 import gotoPage from '@/helpers/gotoPage';
-import colors from '@/data/colors';
 import numberFormat from '@/helpers/numberFormat';
 import router from '@/router';
 
 export default {
-    props: ["product"],
-    filters: {
-        numberFormat,
-    },
-    computed: {
-        colors() {
-            return colors;
-        }
-    },
-    methods: {
-        gotoPage
-    },
-    components: { router }
+  props: ["product"],
+  filters: {
+    numberFormat,
+  },
+  methods: {
+    gotoPage
+  },
+  components: { router }
 };
 
 </script>

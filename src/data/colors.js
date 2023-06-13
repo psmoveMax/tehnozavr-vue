@@ -2,32 +2,32 @@ export default [
     {
         id: 1,
         title: 'Черный',
-        color: 'black'
+        code: 'black'
     },
     {
         id: 2,
         title: 'Синий',
-        color: 'blue'
+        code: 'blue'
     },
     {
         id: 3,
         title: 'Красный',
-        color: 'red'
+        code: 'red'
     },
     {
         id: 4,
         title: 'Зеленый',
-        color: 'green'
+        code: 'green'
     },
     {
         id: 5,
         title: 'Серый',
-        color: 'gray'
+        code: 'gray'
     },
     {
         id: 6,
         title: 'Золотой',
-        color: 'gold'
+        code: 'gold'
     }
 
 ]
