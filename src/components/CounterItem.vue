@@ -5,7 +5,7 @@
         <use xlink:href="#icon-minus"></use>
       </svg>
     </button>
-    <input aria-label="lorem ipsum" v-model.number="localValue">
+    <input aria-label="lorem ipsum" v-model.number="localValue" @change="changeInput()">
     <button type="button" aria-label="Добавить один товар" @click.prevent="PlusItem">
       <svg :width="size" :height="size" fill="currentColor">
         <use xlink:href="#icon-plus"></use>
@@ -34,6 +34,9 @@ export default {
       }
 
     },
+    changeInput: function () {
+      this.$emit('update-amount', this.localValue);
+    }
   }
 }
 </script>

@@ -43,30 +43,16 @@
             <fieldset class="form__block">
               <legend class="form__legend">Цвет:</legend>
               <ul class="colors">
-                <li class="colors__item">
-                  <label for="color_1" class="colors__label">
-                    <input class="colors__radio sr-only" type="radio" name="color-item" value="blue" checked="true"
-                      id="color_1">
-                    <span class="colors__value" style="background-color: #73B6EA;">
-                    </span>
+                <li class="colors__item" v-for="color in  product.colors " :key="color.id">
+                  <label class="colors__label" :for="color.id">
+                    <input class="colors__radio sr-only" type="radio" :id="color.id" name="color" :value="color.id">
+                    <span class="colors__value" :value="color.id" :style="{ backgroundColor: color.code }"> </span>
                   </label>
-                </li>
-                <li class="colors__item">
-                  <label for="color_2" class="colors__label">
-                    <input id="color_2" class="colors__radio sr-only" type="radio" name="color-item" value="yellow">
-                    <span class="colors__value" style="background-color: #FFBE15;">
-                    </span>
-                  </label>
-                </li>
-                <li class="colors__item">
-                  <label for="color_3" class="colors__label">
-                    <input id="color_3" class="colors__radio sr-only" type="radio" name="color-item" value="gray">
-                    <span class="colors__value" style="background-color: #939393;">
-                    </span></label>
                 </li>
               </ul>
             </fieldset>
 
+            <!--
             <fieldset class="form__block">
               <legend class="form__legend">Объемб в ГБ:</legend>
 
@@ -98,15 +84,18 @@
                 </li>
               </ul>
             </fieldset>
-
+            -->
             <div class="item__row">
               <div class="form__counter">
                 <CounterItem :size="12" :amount="productAmount" @update-amount="updateAmount" />
               </div>
-              <button class="button button--primery" type="submit">
+              <button class="button button--primery" type="submit" :disabled="productAddSend">
                 В корзину
               </button>
             </div>
+
+            <div v-show="productAdded">Товар добавлен в корзину</div>
+            <div v-show="productAddSend">Добавляем товар в корзину</div>
           </form>
         </div>
       </div>
@@ -183,6 +172,7 @@ import numberFormat from '@/helpers/numberFormat';
 import CounterItem from '@/components/CounterItem.vue';
 import axios from 'axios';
 import { API_BASE_URL } from '@/config';
+import { mapActions } from 'vuex';
 
 export default {
   data() {
@@ -191,6 +181,9 @@ export default {
       productData: null,
       productLoading: false,
       productLoadingFailed: false,
+
+      productAdded: false,
+      productAddSend: false,
     };
   },
   components: { CounterItem },
@@ -206,9 +199,16 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['addProductToCart']),
     gotoPage,
     addToCart() {
-      this.$store.commit('addProductToCart', { productId: this.product.id, amount: this.productAmount });
+      this.productAdded = false;
+      this.productAddSend = true;
+      this.addProductToCart({ productId: this.product.id, amount: this.productAmount })
+        .then(() => {
+          this.productAdded = true;
+          this.productAddSend = false;
+        });
     },
     loadProducts() {
       this.productLoading = true;
@@ -220,6 +220,7 @@ export default {
     },
     updateAmount(localValue) {
       this.productAmount = localValue;
+      console.log(this.productAmount);
     },
   },
 
