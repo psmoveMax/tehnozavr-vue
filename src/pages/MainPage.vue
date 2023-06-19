@@ -15,7 +15,7 @@
 
       <section class="catalog">
         <div v-if="productsLoading">Загрузка товаров...</div>
-        <div v-if="productsLoadingFailed">Произошла ошибка при загрузке товаров! <button
+        <div v-if="productsLoadingFailed">Произошла ошибка при загрузке товаров! <button>
             @click.prevent='loadProducts'>Попробовать еще раз</button></div>
         <ProductList :products="products" />
 

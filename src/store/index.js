@@ -76,6 +76,7 @@ export default new Vuex.Store({
         })
         .then((response) => {
           context.commit('updateOrderInfo', response.data);
+          console.log('test');
         });
     },
     loadCart(context) {

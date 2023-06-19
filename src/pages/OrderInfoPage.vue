@@ -1,5 +1,5 @@
 <template>
-  <main class="content container">
+  <main  class="content container">
     <div class="content__top">
       <ul class="breadcrumbs">
         <li class="breadcrumbs__item">
@@ -18,13 +18,15 @@
           </a>
         </li>
       </ul>
-
-      <h1 class="content__title">
-        Заказ оформлен <span>№ 23621</span>
-      </h1>
+      <h1 v-if="cartLoading">Идет загрузка корзины....</h1>
+      <h1 v-if="cartError">Упс. Что-то пошло не так</h1>
     </div>
 
-    <section class="cart">
+    <section v-if="orderInfo" class="cart">
+      <h1 class="content__title">
+        Заказ оформлен <span>№ {{ orderInfo.id }}</span>
+      </h1>
+      <h2>Статус заказа: {{ orderInfo.status.title }}</h2>
       <form class="cart__form form" action="#" method="POST">
         <div class="cart__field">
           <p class="cart__message">
@@ -38,7 +40,7 @@
                 Получатель
               </span>
               <span class="dictionary__value">
-                Иванова Василиса Алексеевна
+                {{ orderInfo.name }}
               </span>
             </li>
             <li class="dictionary__item">
@@ -46,7 +48,7 @@
                 Адрес доставки
               </span>
               <span class="dictionary__value">
-                Москва, ул. Ленина, 21, кв. 33
+                {{ orderInfo.address }}
               </span>
             </li>
             <li class="dictionary__item">
@@ -54,7 +56,7 @@
                 Телефон
               </span>
               <span class="dictionary__value">
-                8 800 989 74 84
+                {{ orderInfo.phone }}
               </span>
             </li>
             <li class="dictionary__item">
@@ -62,7 +64,7 @@
                 Email
               </span>
               <span class="dictionary__value">
-                lalala@mail.ru
+                {{ orderInfo.email }}
               </span>
             </li>
             <li class="dictionary__item">
@@ -73,31 +75,31 @@
                 картой при получении
               </span>
             </li>
+            <li class="dictionary__item">
+              <span class="dictionary__key">
+                Комментарий
+              </span>
+              <span class="dictionary__value">
+                {{ orderInfo.comment }}
+              </span>
+            </li>
           </ul>
         </div>
 
         <div class="cart__block">
           <ul class="cart__orders">
-            <li class="cart__order">
-              <h3>Смартфон Xiaomi Redmi Note 7 Pro 6/128GB</h3>
-              <b>18 990 ₽</b>
-              <span>Артикул: 150030</span>
-            </li>
-            <li class="cart__order">
-              <h3>Гироскутер Razor Hovertrax 2.0ii</h3>
-              <b>4 990 ₽</b>
-              <span>Артикул: 150030</span>
-            </li>
-            <li class="cart__order">
-              <h3>Электрический дрифт-карт Razor Lil’ Crazy</h3>
-              <b>8 990 ₽</b>
-              <span>Артикул: 150030</span>
+            <li class="cart__order" v-for="product in  orderInfo.basket.items" :key="product.id">
+              <h3>{{ product.product.title }}</h3>
+              <b>{{ product.price | numberFormat }} ₽</b>
+              <span>Артикул: {{ product.product.id }}</span>
+              <span>Кол-во: {{ product.quantity }}</span>
             </li>
           </ul>
 
           <div class="cart__total">
             <p>Доставка: <b>500 ₽</b></p>
-            <p>Итого: <b>3</b> товара на сумму <b>37 970 ₽</b></p>
+            <p>Итого: <b>{{ orderInfo.basket.items.length }}</b> позиции на сумму <b>{{ orderInfo.totalPrice |
+              numberFormat }} ₽</b></p>
           </div>
         </div>
       </form>
@@ -106,12 +108,36 @@
 </template>
 
 <script>
+import numberFormat from '@/helpers/numberFormat';
+
 export default {
+  data() {
+    return {
+      orderInfo: null,
+      cartLoading: true,
+      cartError: false,
+      cartErrorTitle: '',
+    };
+  },
   created() {
     if (this.$store.state.orderInfo && this.$store.state.orderInfo.id === this.$route.params.id) {
+      this.cartLoading = false;
+      this.orderInfo = this.$store.state.orderInfo;
       return;
     }
-    this.$store.dispatch('loadOrderInfo', this.$route.params.id);
+    this.$store.dispatch('loadOrderInfo', this.$route.params.id)
+      .then(() => {
+        this.cartLoading = false;
+        this.orderInfo = this.$store.state.orderInfo;
+      })
+      .catch((error) => {
+        this.cartLoading = false;
+        this.cartError = true;
+        this.cartErrorTitle = error;
+      });
+  },
+  filters: {
+    numberFormat,
   },
 };
 </script>

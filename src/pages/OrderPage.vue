@@ -169,8 +169,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters({ products: 'cartDetailProducts', totalPrice: 'cartTotalPrice' }),
-    ...mapGetters({ products: 'cartDetailProducts', totalAmount: 'cartTotalAmount' }),
+    ...mapGetters({ products: 'cartDetailProducts', totalPrice: 'cartTotalPrice', totalAmount: 'cartTotalAmount' }),
   },
 };
 </script>
