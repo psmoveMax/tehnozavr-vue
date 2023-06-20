@@ -1,5 +1,5 @@
 <template>
-  <main  class="content container">
+  <main class="content container">
     <div class="content__top">
       <ul class="breadcrumbs">
         <li class="breadcrumbs__item">
@@ -19,7 +19,10 @@
         </li>
       </ul>
       <h1 v-if="cartLoading">Идет загрузка корзины....</h1>
-      <h1 v-if="cartError">Упс. Что-то пошло не так</h1>
+      <div v-if="cartError">
+        <h1>Упс. Что-то пошло не так</h1>
+        <p>{{ cartErrorTitle }}</p>
+      </div>
     </div>
 
     <section v-if="orderInfo" class="cart">
